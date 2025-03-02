@@ -1,12 +1,12 @@
 package zyx.userservice.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-
+import zyx.userservice.Service.UserService;
+import zyx.userservice.entity.User;
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class AiController
@@ -14,6 +14,8 @@ public class AiController
 
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/ask-ai")
     public String askAI(@RequestBody String question) {
@@ -30,5 +32,10 @@ public class AiController
             e.printStackTrace();
             return "调用 AI 服务失败: " + e.getMessage();
         }
+    }
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable Integer id) {
+        log.info("用户被调用！");
+        return userService.getById(id);
     }
 }

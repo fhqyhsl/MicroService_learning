@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 0
 spring:
   application:
     name: user-service
@@ -9,3 +9,12 @@ spring:
         server-addr: localhost:8848
         username: nacos
         password: nacos
+  datasource:
+       url: jdbc:mysql://localhost:3306/user_center?useSSL=false&serverTimezone=UTC
+       username: root
+       password: zyx20040720
+       driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true  # 自动驼峰转换
+
